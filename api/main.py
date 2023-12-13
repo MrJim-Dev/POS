@@ -2,12 +2,13 @@ import os
 from flask import Flask, jsonify, request, render_template
 from flask_mysqldb import MySQL
 
-from users import create_user, get_users, get_user, update_user, delete_user
+from dashboard import get_stats
 from products import create_product, get_products, get_product, update_product, delete_product
 from customers import create_customer, get_customers, get_customer, update_customer, delete_customer
 from suppliers import create_supplier, get_suppliers, get_supplier, update_supplier, delete_supplier
 from inventory import create_inventory, get_inventories, get_inventory, update_inventory, delete_inventory
 from orders import create_order, get_order, get_orders, delete_order, get_order_details, add_order_detail
+
 from flask_cors import CORS
 
 from database import set_mysql
@@ -37,6 +38,12 @@ def home():
   # return jsonify({"message": "Hello, CSIT327!"})
   return render_template('index.html');
 
+# ! Dashboard Endpoints
+@app.route("/dashboard", methods=["GET"])
+def dashboard():
+    totals = get_stats()
+    return jsonify(totals)
+
 # ! Products Endpoints
 @app.route("/products", methods=["GET", "POST"])
 def products():
@@ -47,7 +54,6 @@ def products():
             data["stock_quantity"]
         )
         return jsonify(products)
-
     else:
         products = get_products()
         return jsonify(products)
@@ -148,32 +154,22 @@ def inventory_item(inventory_id):
 def orders():
     if request.method == "POST":
         data = request.get_json()
+        # Expecting data to have 'customer_id' and 'products' (a list of {'product_id': x, 'quantity': y})
         new_order = create_order(
-            data["customer_id"], data["product_id"], data["quantity"]
+            data["customer_id"], 
+            [(prod["product_id"], prod["quantity"]) for prod in data["products"]]
         )
         return jsonify(new_order)
     else:
         all_orders = get_orders()
         return jsonify(all_orders)
 
-# Endpoint to handle a specific order
+# Specific Order Endpoint
 @app.route("/orders/<int:order_id>", methods=["GET", "DELETE"])
 def order(order_id):
     if request.method == "DELETE":
         return jsonify(delete_order(order_id))
+        
     else:
         order = get_order(order_id)
         return jsonify(order)
-
-# Endpoint to handle order details for a specific order
-@app.route("/orders/<int:order_id>/details", methods=["GET", "POST"])
-def order_details(order_id):
-    if request.method == "POST":
-        data = request.get_json()
-        new_order_detail = add_order_detail(
-            order_id, data["product_id"], data["quantity"]
-        )
-        return jsonify(new_order_detail)
-    else:
-        details = get_order_details(order_id)
-        return jsonify(details)

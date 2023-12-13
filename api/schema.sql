@@ -55,20 +55,19 @@ CREATE TABLE inventory (
     FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id)
 );
 
-CREATE VIEW OrdersTable AS
+CREATE VIEW invoices AS
 SELECT 
-    orders.order_id, 
-    customers.name AS customer_name, 
-    products.name AS product_name, 
-    order_details.quantity, 
-    order_details.line_total,
-    orders.order_date
-FROM orders 
-JOIN order_details ON orders.order_id = order_details.order_id 
-JOIN products ON order_details.product_id = products.product_id
-JOIN customers ON orders.customer_id = customers.customer_id;
-
-
+    o.order_id, 
+    c.name AS customer_name, 
+    o.order_date, 
+    GROUP_CONCAT(p.name SEPARATOR ', ') AS products,
+    GROUP_CONCAT(od.quantity SEPARATOR ', ') AS quantities,
+    SUM(od.line_total) AS total_amount
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+JOIN order_details od ON o.order_id = od.order_id
+JOIN products p ON od.product_id = p.product_id
+GROUP BY o.order_id;
 
 -- Order Summary View
 CREATE VIEW OrderSummary AS
@@ -98,25 +97,14 @@ JOIN suppliers s ON i.supplier_id = s.supplier_id;
 
 -- Add Order Procedures
 DELIMITER //
-CREATE PROCEDURE AddOrder(IN cust_id INT, IN prod_id INT, IN qty INT, OUT new_order_id INT)
+CREATE PROCEDURE AddOrder(IN cust_id INT, OUT new_order_id INT)
 BEGIN
-    DECLARE ord_total DECIMAL(10, 2);
-
-    -- Insert into orders table
+    -- Insert into orders table with an initial total amount of 0
     INSERT INTO orders (customer_id, total_amount) VALUES (cust_id, 0);
-    SET new_order_id = LAST_INSERT_ID();
-
-    -- Calculate total amount
-    SELECT price INTO ord_total FROM products WHERE product_id = prod_id;
-    SET ord_total = ord_total * qty;
-
-    -- Insert into order details
-    INSERT INTO order_details (order_id, product_id, quantity, line_total) VALUES (new_order_id, prod_id, qty, ord_total);
-
-    -- Update the total amount in orders table
-    UPDATE orders SET total_amount = ord_total WHERE order_id = new_order_id;
+    SET new_order_id = LAST_INSERT_ID();  
 END //
 DELIMITER ;
+
 
 -- Adter Order Insert Trigger
 DELIMITER //
