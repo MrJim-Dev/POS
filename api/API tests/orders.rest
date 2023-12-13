@@ -1,0 +1,43 @@
+@host=http://127.0.0.1:5000
+
+### Orders API Tests
+
+### ! Create Order
+POST {{host}}/orders
+Content-Type: application/json
+
+{
+    "customer_id": 3,
+    "products": [
+        {"product_id": 25, "quantity": 3},
+        {"product_id": 26, "quantity": 1} 
+    ]
+}
+
+### ! Read All Orders
+GET {{host}}/orders
+Content-Type: application/json
+
+### ! Read Single Order
+
+GET {{host}}/orders/12
+Content-Type: application/json
+
+
+### ! Add Order Detail
+# This remains the same as it adds a detail to an existing order
+POST {{host}}/orders/1/details
+Content-Type: application/json
+
+{
+    "product_id": 25,
+    "quantity": 3
+}
+
+### ! Read Order Details
+GET {{host}}/orders/1/details
+Content-Type: application/json
+
+### ! Delete Order.
+DELETE {{host}}/orders/3
+Content-Type: application/json
