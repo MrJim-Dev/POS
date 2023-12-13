@@ -1,0 +1,35 @@
+@host=http://127.0.0.1:5000
+
+### ? INVENTORY API TEST
+
+### !  Inventory Item
+POST {{host}}/inventory
+Content-Type: application/json
+
+{
+  "product_id": 25,
+  "supplier_id": 2,
+  "quantity": 100
+}
+
+### ! Read All Inventory Items
+GET {{host}}/inventory
+Content-Type: application/json
+
+### ! Read Single Inventory Item
+GET {{host}}/inventory/4
+Content-Type: application/json
+
+### ! Update an Inventory Item
+PUT {{host}}/inventory/1
+Content-Type: application/json
+
+{
+  "product_id": 2,
+  "supplier_id": 2,
+  "quantity": 150
+}
+
+### ! Delete an Inventory Item
+DELETE {{host}}/inventory/1
+Content-Type: application/json
