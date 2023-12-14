@@ -116,3 +116,27 @@ BEGIN
     WHERE product_id = NEW.product_id;
 END //
 DELIMITER ;
+
+-- Dashboardview
+CREATE VIEW DashboardView AS
+SELECT 
+    -- Total Sales Information
+    (SELECT SUM(total_amount) FROM orders) AS total_sales,
+    (SELECT COUNT(*) FROM orders) AS total_orders,
+    (SELECT COUNT(DISTINCT customer_id) FROM orders) AS unique_customers,
+
+    -- Inventory Overview
+    (SELECT SUM(stock_quantity) FROM products) AS total_stock,
+    (SELECT COUNT(*) FROM products) AS total_products,
+    (SELECT COUNT(*) FROM suppliers) AS total_suppliers,
+
+    -- Recent Orders Information
+    (SELECT COUNT(*) FROM orders WHERE order_date > NOW() - INTERVAL 7 DAY) AS recent_orders,
+    (SELECT SUM(total_amount) FROM orders WHERE order_date > NOW() - INTERVAL 7 DAY) AS recent_sales,
+
+    -- Customer Engagement
+    (SELECT COUNT(*) FROM customers) AS total_customers,
+    (SELECT COUNT(*) FROM customers WHERE email IS NOT NULL) AS customers_with_email,
+    (SELECT COUNT(*) FROM customers WHERE phone IS NOT NULL) AS customers_with_phone
+
+FROM DUAL;
