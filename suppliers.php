@@ -6,7 +6,7 @@ include("config.php");
 $curl = curl_init();
 
 // Set cURL options
-curl_setopt($curl, CURLOPT_URL, "http://127.0.0.1:5000/suppliers");
+curl_setopt($curl, CURLOPT_URL, "http://http://pospal.jimtech.solutions:5000//suppliers");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
 
@@ -286,7 +286,7 @@ $data = json_decode($response, true);
 
       $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:5000/suppliers",
+        url: "http://http://pospal.jimtech.solutions:5000//suppliers",
         data: JSON.stringify(formData), // Convert formData to a JSON string
         contentType: "application/json", // Set content type to JSON
         dataType: "json", // Expect a JSON response
@@ -352,7 +352,7 @@ $data = json_decode($response, true);
 
         $.ajax({
           type: "PUT",
-          url: `http://127.0.0.1:5000/suppliers/${uid}`,
+          url: `http://http://pospal.jimtech.solutions:5000//suppliers/${uid}`,
           data: JSON.stringify(formData), // Convert formData to a JSON string
           contentType: "application/json", // Set content type to JSON
           dataType: "json", // Expect a JSON response
@@ -384,7 +384,7 @@ $data = json_decode($response, true);
 
       $.ajax({
         type: "DELETE",
-        url: `http://127.0.0.1:5000/suppliers/${uid}`,
+        url: `http://http://pospal.jimtech.solutions:5000//suppliers/${uid}`,
         success: function(response) {
           console.log(response);
 

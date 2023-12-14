@@ -2,4 +2,4 @@
 define('SITE_URL', '');
 
 define('SITE_NAME', 'POSPal');
-define('API_HOST', '127.0.0.1:5000');
+define('API_HOST', 'http://pospal.jimtech.solutions:5000/');
