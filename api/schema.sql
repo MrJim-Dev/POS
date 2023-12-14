@@ -79,7 +79,7 @@ GROUP BY orders.order_id;
 
 -- Inventory View
 
-CREATE VIEW InventoryView AS
+CREATE VIEW inventoryview AS
 SELECT 
     p.product_id,
     p.name AS product_name,
@@ -101,10 +101,9 @@ CREATE PROCEDURE AddOrder(IN cust_id INT, OUT new_order_id INT)
 BEGIN
     -- Insert into orders table with an initial total amount of 0
     INSERT INTO orders (customer_id, total_amount) VALUES (cust_id, 0);
-    SET new_order_id = LAST_INSERT_ID();  
+    SET new_order_id = LAST_INSERT_ID();
 END //
 DELIMITER ;
-
 
 -- Adter Order Insert Trigger
 DELIMITER //
@@ -118,7 +117,7 @@ END //
 DELIMITER ;
 
 -- Dashboardview
-CREATE VIEW DashboardView AS
+CREATE VIEW dashboardview AS
 SELECT 
     -- Total Sales Information
     (SELECT SUM(total_amount) FROM orders) AS total_sales,

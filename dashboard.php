@@ -272,10 +272,8 @@ $productsData = json_decode($response, true);
                       <td>' . $i . '</td>
                       <td>' . $row['name'] . '</td>
                       <td>' . $row['category'] . '</td>
-                      <td>' . $row['price'] . '</td>
+                      <td>₱ ' . $row['price'] . '</td>
                       <td>' . $row['stock_quantity'] . '</td>
-                      
-
                     </tr>';
                   }
                   ?>
