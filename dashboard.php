@@ -23,7 +23,7 @@ $data = json_decode($response, true);
 $curl = curl_init();
 
 // Set cURL options
-curl_setopt($curl, CURLOPT_URL, "http://pospal.jimtech.solutions:5000//orders");
+curl_setopt($curl, CURLOPT_URL, "http://pospal.jimtech.solutions:5000/orders");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
 
@@ -40,7 +40,7 @@ $orders = json_decode($response, true);
 $curl = curl_init();
 
 // Set cURL options
-curl_setopt($curl, CURLOPT_URL, "http://pospal.jimtech.solutions:5000//products");
+curl_setopt($curl, CURLOPT_URL, "http://pospal.jimtech.solutions:5000/products");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
 

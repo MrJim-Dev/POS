@@ -266,7 +266,7 @@ $data = json_decode($response, true);
 
       $.ajax({
         type: "POST",
-        url: "http://pospal.jimtech.solutions:5000//customers",
+        url: "http://pospal.jimtech.solutions:5000/customers",
         data: JSON.stringify(formData), // Convert formData to a JSON string
         contentType: "application/json", // Set content type to JSON
         dataType: "json", // Expect a JSON response
@@ -321,7 +321,7 @@ $data = json_decode($response, true);
 
         $.ajax({
           type: "PUT",
-          url: `http://pospal.jimtech.solutions:5000//customers/${uid}`,
+          url: `http://pospal.jimtech.solutions:5000/customers/${uid}`,
           data: JSON.stringify(formData), // Convert formData to a JSON string
           contentType: "application/json", // Set content type to JSON
           dataType: "json", // Expect a JSON response
@@ -353,7 +353,7 @@ $data = json_decode($response, true);
 
       $.ajax({
         type: "DELETE",
-        url: `http://pospal.jimtech.solutions:5000//customers/${uid}`,
+        url: `http://pospal.jimtech.solutions:5000/customers/${uid}`,
         success: function(response) {
           console.log(response);
 
