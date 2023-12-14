@@ -2,7 +2,7 @@
 include("config.php");
 
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, "http://http://pospal.jimtech.solutions:5000//suppliers");
+curl_setopt($curl, CURLOPT_URL, "http://pospal.jimtech.solutions:5000//suppliers");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
 $response = curl_exec($curl);
@@ -10,7 +10,7 @@ curl_close($curl);
 $suppliers = json_decode($response, true);
 
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, "http://http://pospal.jimtech.solutions:5000//products");
+curl_setopt($curl, CURLOPT_URL, "http://pospal.jimtech.solutions:5000//products");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
 $response = curl_exec($curl);
@@ -23,7 +23,7 @@ if (!isset($_GET['id'])) {
   $id = $_GET['id'];
 
   $curl = curl_init();
-  curl_setopt($curl, CURLOPT_URL, "http://http://pospal.jimtech.solutions:5000//inventory/$id");
+  curl_setopt($curl, CURLOPT_URL, "http://pospal.jimtech.solutions:5000//inventory/$id");
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($curl, CURLOPT_HEADER, false);
   $response = curl_exec($curl);
@@ -184,7 +184,7 @@ if (!isset($_GET['id'])) {
 
       $.ajax({
         type: "PUT",
-        url: `http://http://pospal.jimtech.solutions:5000//inventory/${$uid}`,
+        url: `http://pospal.jimtech.solutions:5000//inventory/${$uid}`,
         data: JSON.stringify(formData), // Convert formData to a JSON string
         contentType: "application/json", // Set content type to JSON
         dataType: "json", // Expect a JSON response

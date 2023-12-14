@@ -22,3 +22,5 @@ Installation Instructions
 
 To run flask, execute this command:
 > flask --app main run --debug
+
+flask --app main run --host=0.0.0.0
