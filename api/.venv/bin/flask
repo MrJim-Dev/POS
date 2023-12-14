@@ -1,4 +1,4 @@
-#!/Users/art/Downloads/python/myproject/.venv/bin/python3.11
+#!/var/www/html/api/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
