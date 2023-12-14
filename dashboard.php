@@ -1,5 +1,6 @@
 <?php
 include('config.php');
+phpinfo();
 
 // Initialize cURL session
 $curl = curl_init();

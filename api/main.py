@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-CORS(app, resources={r"/*": {"origins": "http://pos"}})
+CORS(app)
 
 load_dotenv()
 # Required
@@ -35,8 +35,7 @@ set_mysql(mysql)
 
 @app.route("/")
 def home():
-  # return jsonify({"message": "Hello, CSIT327!"})
-  return render_template('index.html');
+  return "Hello!";
 
 # ! Dashboard Endpoints
 @app.route("/dashboard", methods=["GET"])
@@ -173,3 +172,6 @@ def order(order_id):
     else:
         order = get_order(order_id)
         return jsonify(order)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
