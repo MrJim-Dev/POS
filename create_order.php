@@ -2,7 +2,7 @@
 include("config.php");
 
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, "http://127.0.0.1:5000/customers");
+curl_setopt($curl, CURLOPT_URL, "http://http://pospal.jimtech.solutions:5000//customers");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
 $response = curl_exec($curl);
@@ -10,7 +10,7 @@ curl_close($curl);
 $customers = json_decode($response, true);
 
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, "http://127.0.0.1:5000/products");
+curl_setopt($curl, CURLOPT_URL, "http://http://pospal.jimtech.solutions:5000//products");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
 $response = curl_exec($curl);
@@ -206,7 +206,7 @@ $products = json_decode($response, true);
 
       $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:5000/orders",
+        url: "http://http://pospal.jimtech.solutions:5000//orders",
         data: JSON.stringify(formData),
         contentType: "application/json",
         dataType: "json",
@@ -239,7 +239,7 @@ $products = json_decode($response, true);
 
         $.ajax({
           type: "GET",
-          url: `http://127.0.0.1:5000/products/${pid}`,
+          url: `http://http://pospal.jimtech.solutions:5000//products/${pid}`,
           dataType: "json", // Expect a JSON response
           success: function(response) {
             console.log(response);

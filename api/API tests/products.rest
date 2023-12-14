@@ -1,4 +1,4 @@
-@host=http://127.0.0.1:5000
+@host=http://http://pospal.jimtech.solutions:5000/
 
 # ? PRODUCTS API TESTS
 

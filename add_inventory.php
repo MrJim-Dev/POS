@@ -2,7 +2,7 @@
 include("config.php");
 
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, "http://127.0.0.1:5000/suppliers");
+curl_setopt($curl, CURLOPT_URL, "http://http://pospal.jimtech.solutions:5000//suppliers");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
 $response = curl_exec($curl);
@@ -10,7 +10,7 @@ curl_close($curl);
 $suppliers = json_decode($response, true);
 
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, "http://127.0.0.1:5000/products");
+curl_setopt($curl, CURLOPT_URL, "http://http://pospal.jimtech.solutions:5000//products");
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
 $response = curl_exec($curl);
@@ -150,7 +150,7 @@ $products = json_decode($response, true);
 
       $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:5000/inventory",
+        url: "http://http://pospal.jimtech.solutions:5000//inventory",
         data: JSON.stringify(formData), // Convert formData to a JSON string
         contentType: "application/json", // Set content type to JSON
         dataType: "json", // Expect a JSON response
