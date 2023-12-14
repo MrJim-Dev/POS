@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-CORS(app, origins=["https://pospal.mrjim.dev", "http://pos"], methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type"])
+CORS(app)
 
 load_dotenv()
 # Required
